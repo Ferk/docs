@@ -94,6 +94,10 @@ PrBoom can load wad, iwad, and pwad files. The PrBoom core requires data ROM ['p
 
 You must use a separate folder for each wad to be able to have all Dooms use their correct music
 
+In order to load pwads (custom expansions or mods) it's  the corresponding iwad file (the official game they ar extending) should be in the same directory or in a parent directory (if the core option "Scan parent folders for IWADs" is enabled).
+
+If there are deh or bex files with the same name (different extension), they will be loaded alongside the iwad or pwad.
+
 An example folder structure would be like so:
 
 ```
@@ -106,7 +110,11 @@ An example folder structure would be like so:
         └── doom2/
             ├── doom2.wad
             ├── prboom.wad
-            └── doom2music.mp3
+            ├── doom2music.mp3
+	    └── wolfendoom-original/
+	        ├── original.wad
+		├── original.deh
+		└── original.orig15.wad
 ```
 
 Game saves and internal configuration files will be created in the frontend-defined save directory, organised in folders matching the filenames of loaded content - for example:
@@ -118,10 +126,13 @@ Game saves and internal configuration files will be created in the frontend-defi
         │   ├── prbmsav0.dsg
         │   ├── prbmsav1.dsg
         │   └── prboom.cfg
-        └── doom2/
-            ├── prbmsav0.dsg
-            ├── prbmsav1.dsg
-            └── prboom.cfg
+        ├── doom2/
+        │   ├── prbmsav0.dsg
+        │   ├── prbmsav1.dsg
+        │   └── prboom.cfg
+	└── original/
+	    ├── prbmsav0.dsg
+	    └── prboom.cfg
 ```
 
 Game saves are numbered from 'prbmsav0.dsg' to 'prbmsav7.dsg'.
@@ -260,7 +271,7 @@ Settings with (Restart) means that core has to be closed for the new setting to 
 	
 - **Look on parent folders for IWADs** [prboom-find_recursive_on] (**enabled**|disabled)
 
-	Scans parent folders for IWADs.
+	When a PWAD is loaded, parent folders will be scanned to search for IWADs.
 
 - **Analog Deadzone (percent)** [prboom-analog_deadzone] (**15**|20|25|30|0|5|10)
 
